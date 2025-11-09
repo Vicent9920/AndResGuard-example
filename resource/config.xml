@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resguard>
+    <!-- 混淆映射文件，可选 -->
+    <mappingFile>mapping.txt</mappingFile>
+
+    <!-- 白名单：保留所有非图片资源 -->
+    <keep>
+        <!-- 保留 values（必须，否则崩溃） -->
+        <path>res/values/</path>
+
+        <!-- 保留 layout、menu、xml -->
+        <path>res/layout/</path>
+        <path>res/menu/</path>
+        <path>res/xml/</path>
+
+        <!-- 保留动画、字体 -->
+        <path>res/anim/</path>
+        <path>res/animator/</path>
+        <path>res/font/</path>
+        <pattern>*.ttf</pattern>
+        <pattern>*.otf</pattern>
+
+        <!-- 保留 raw、assets -->
+        <path>res/raw/</path>
+        <path>assets/</path>
+
+        <!-- 保留配置文件、证书等 -->
+        <pattern>*.json</pattern>
+        <pattern>*.xml</pattern>
+        <pattern>*.js</pattern>
+        <pattern>*.html</pattern>
+        <pattern>*.pem</pattern>
+        <pattern>*.cer</pattern>
+
+        <!-- 保留 native 库 -->
+        <path>lib/</path>
+        <pattern>*.so</pattern>
+
+        <!-- 保留 dex 和 APK 根目录内容 -->
+        <pattern>classes.dex</pattern>
+        <pattern>META-INF/*</pattern>
+        <pattern>resources.arsc</pattern>
+    </keep>
+
+    <!-- 压缩与混淆配置 -->
+    <compress>
+        <!-- 不压缩 APK 内任何内容 -->
+        <resguardCompress>false</resguardCompress>
+        <use7zip>false</use7zip>
+        <alignFile>true</alignFile>
+        <keepRoot>true</keepRoot>
+
+        <!-- 禁止压缩 native 库、dex、资源文件 -->
+        <noCompress>
+            <pattern>lib/*</pattern>
+            <pattern>*.so</pattern>
+            <pattern>classes.dex</pattern>
+            <pattern>resources.arsc</pattern>
+            <pattern>META-INF/*</pattern>
+        </noCompress>
+    </compress>
+
+    <sign>
+        <useSign>true</useSign>
+        <keyStore>${rootProject.rootDir}/resource/of.keystore</keyStore>
+        <keyAlias>com.push.surprise</keyAlias>
+        <storePass>com.push.surprise</storePass>
+        <keyPass>com.push.surprise</keyPass>
+    </sign>
+    <!-- 混淆策略：仅混淆 drawable/mipmap 目录下的图片资源 -->
+    <shrink>
+        <path>res/drawable/</path>
+        <path>res/drawable-*/</path>
+        <path>res/mipmap/</path>
+        <path>res/mipmap-*/</path>
+    </shrink>
+</resguard>
